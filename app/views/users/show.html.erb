@@ -1,29 +1,29 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>名前:</strong>
   <%= @user.name %>
 </p>
 
 <p>
-  <strong>Gender:</strong>
+  <strong>性別:</strong>
   <%= @user.gender %>
 </p>
 
 <p>
-  <strong>Address:</strong>
-  <%= @user.address %>
+  <strong>メールアドレス:</strong>
+  <%= @user.email %>
 </p>
 
 <p>
-  <strong>Phone number:</strong>
+  <strong>電話番号:</strong>
   <%= @user.phone_number %>
 </p>
 
 <p>
-  <strong>Remarks:</strong>
+  <strong>備考:</strong>
   <%= @user.remarks %>
 </p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<%= link_to '編集', edit_user_path(@user) %> |
+<%= link_to '戻る', users_path %>

@@ -1,0 +1,8 @@
+ja:
+  activerecord:
+    models:
+      comment: コメント投稿
+    attributes:
+      comment:
+        titile: タイトル
+        body: 本文
