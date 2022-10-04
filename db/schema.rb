@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2022_09_30_143721) do
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "gender"
-    t.string "address"
+    t.string "email"
     t.string "phone_number"
     t.string "remarks"
     t.datetime "created_at", precision: 6, null: false

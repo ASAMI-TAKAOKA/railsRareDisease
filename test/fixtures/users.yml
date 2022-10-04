@@ -3,13 +3,13 @@
 one:
   name: MyString
   gender: MyString
-  address: MyString
+  email: MyString
   phone_number: MyString
   remarks: MyString
 
 two:
   name: MyString
   gender: MyString
-  address: MyString
+  email: MyString
   phone_number: MyString
   remarks: MyString
