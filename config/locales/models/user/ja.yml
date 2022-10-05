@@ -6,6 +6,5 @@ ja:
       user:
         name: 名前
         gender: 性別
-        email: メールアドレス
         phone_number: 電話番号
         remarks: 備考
