@@ -1,5 +1,8 @@
 class ApplicationController < ActionController::Base
   before_action :configure_sign_up_parameters, if: :devise_controller?
+  # RailsにおけるCSRF対策
+  protect_from_forgery with: :exception
+  include SessionsHelper
 
   protected
     def configure_sign_up_parameters
