@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
+gem 'pry-rails'
+
 gem 'devise-i18n'
 ruby '2.7.6'
 gem 'devise'
