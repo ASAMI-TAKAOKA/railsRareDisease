@@ -7,6 +7,7 @@ class User < ApplicationRecord
   # アソシエーション
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
+  # has_secure_password
   # validates :name, presence: true
   # validates :gender, presence: true
   # validates :email, presence: true
