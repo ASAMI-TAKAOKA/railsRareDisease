@@ -25,5 +25,32 @@
   <%= @user.remarks %>
 </p>
 
+<p>
+  <strong>投稿記事一覧:</strong>
+    <% @posts.each do |post| %>
+      <table class="table-light table-bordered text-dark">
+      <tbody>
+      <tr>
+        <td>
+          <div class="row no-gutters">
+            <div class="content_post" >
+            <p>【記事タイトル】<%= post.body %></p>
+            <p>【記事本文】<%= post.body %></p>
+            <p>【投稿日時】<%= post.created_at.to_s(:datetime_jp) %></p>
+            <p>【更新日時】<%= post.updated_at.to_s(:datetime_jp) %></p>
+              <!-- 投稿記事を編集・削除する -->
+              <% if user_signed_in? && current_user.id == post.user_id %>
+              <%= link_to '編集', edit_post_path(post.id), method: :get, class: "btn btn-info mr-3" %>
+              <%= link_to '削除', "/posts/#{post.id}", method: :delete, class: "btn btn-info mr-3" %>
+              <% end %>
+            </div>
+          </div>
+        </td>
+      </tr>     
+      </tbody>
+      </table>
+    <% end %>
+</p>
+
 <%= link_to '編集', edit_user_path(@user) %> |
 <%= link_to '戻る', users_path %>
