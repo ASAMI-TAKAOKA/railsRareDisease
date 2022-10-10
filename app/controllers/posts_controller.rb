@@ -9,6 +9,10 @@ class PostsController < ApplicationController
   # GET /posts/1 or /posts/1.json
   def show
     @comment = Comment.new
+    # postsテーブルとcommentsテーブルはアソシエーションが組まれているため、
+    # @post.commentsとすることで、@postについて投稿された全てのコメントを取得することができる。
+    # ビューではどのユーザーのコメントかを明らかにするために、アソシエーションを使ってユーザーのレコードを取得する処理をする。
+    # includesメソッドはN+1問題解消のために使用
     @comments = @post.comments.includes(:user)
   end
 
