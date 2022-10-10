@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[ show edit update destroy ]
+  before_action :set_post, only: %i[ show edit ]
 
   # GET /posts or /posts.json
   def index
@@ -8,6 +8,8 @@ class PostsController < ApplicationController
 
   # GET /posts/1 or /posts/1.json
   def show
+    @comment = Comment.new
+    @comments = @post.comments.includes(:user)
   end
 
   # GET /posts/new
@@ -52,18 +54,20 @@ class PostsController < ApplicationController
     @post.destroy
 
     respond_to do |format|
-      format.html { redirect_to posts_url, notice: "記事を削除しました。" }
+      format.html { redirect_to root_path, notice: "記事を削除しました。" }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    # アクション間で共通の設定や制約を共有するには、コールバックを使用する
+    # コールバック:バリデーションの実行やDBへの保存などのタイミングで処理を行うための機能
+    # あるタイミングで必ず実行する必要がある処理をコールバックに指定することで、モデルの一貫性を保つことができる
     def set_post
       @post = Post.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
+    # 信頼できるパラメータのリストのみ通過させる。
     def post_params
       params.require(:post).permit(:titile, :body).merge(user_id: current_user.id)
     end

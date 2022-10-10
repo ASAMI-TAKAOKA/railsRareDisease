@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-
+<h2>投稿詳細</h2>
 <p>
   <strong>タイトル:</strong>
   <%= @post.titile %>
@@ -9,6 +9,5 @@
   <strong>本文:</strong>
   <%= @post.body %>
 </p>
-
-<%= link_to '編集', edit_post_path(@post) %> |
-<%= link_to '戻る', posts_path %>
+<%= render 'comments/form', comment: @comment %>
+<%= render 'comments/show', comment: @comment %>

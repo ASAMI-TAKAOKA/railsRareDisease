@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<h3>コメント一覧</h3>
+<% @comments.each do |comment| %>
+  <table class="table-light table-bordered text-dark">
+    <tbody>
+      <tr>
+        <td>
+            <p>
+              <strong><%= link_to comment.user.name, "/users/#{comment.user_id}" %>:</strong>
+              <%= comment.titile %>
+              <%= comment.body %>
+            </p>
+        </td>
+      </tr>     
+    </tbody>
+  </table>
+<% end %>
+
+<%= link_to '編集', root_path %> |
+<%= link_to '戻る', root_path %>
