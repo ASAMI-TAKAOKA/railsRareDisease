@@ -1,19 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: %i[ show edit update destroy ]
-
-  # GET /comments or /comments.json
-  def index
-    @comments = Comment.all
-  end
-
-  # GET /comments/1 or /comments/1.json
-  def show
-  end
-
-  # GET /comments/new
-  def new
-    @comment = Comment.new
-  end
+  before_action :set_comment, only: %i[ edit create update destroy ]
 
   # GET /comments/1/edit
   def edit
@@ -21,11 +7,11 @@ class CommentsController < ApplicationController
 
   # POST /comments or /comments.json
   def create
-    @comment = Comment.new(comment_params)
+    @comment = Comment.create(comment_params)
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to comment_url(@comment), notice: "新規コメントを投稿しました。" }
+        format.html { redirect_to "/posts/#{comment.post.id}", notice: "新規コメントを投稿しました。" }
         format.json { render :show, status: :created, location: @comment }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +24,7 @@ class CommentsController < ApplicationController
   def update
     respond_to do |format|
       if @comment.update(comment_params)
-        format.html { redirect_to comment_url(@comment), notice: "コメントを更新しました。" }
+        format.html { redirect_to posts_path(@comment), notice: "コメントを更新しました。" }
         format.json { render :show, status: :ok, location: @comment }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +38,7 @@ class CommentsController < ApplicationController
     @comment.destroy
 
     respond_to do |format|
-      format.html { redirect_to comments_url, notice: "コメントを削除しました。" }
+      format.html { redirect_to root_path, notice: "コメントを削除しました。" }
       format.json { head :no_content }
     end
   end
@@ -63,8 +49,13 @@ class CommentsController < ApplicationController
       @comment = Comment.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
+    # 信頼できるパラメータのリストのみ通過させる。
+    # item_id: params[:post_id]で値を入れることができるのは、ルーティングをネストし、URLにpost_idを含めているため。
+    # ストロングパラメーターはprivateメソッド以下に記述する。
+
+    # requireの引数は、モデル名。
+    # permitの引数は、DBのカラム名。
     def comment_params
-      params.require(:comment).permit(:titile, :body)
+      params.permit(:titile, :body).merge(user_id: current_user.id, post_id: params[:post_id])
     end
 end

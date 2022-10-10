@@ -7,8 +7,11 @@ Rails.application.routes.draw do
     get '/users/sign_in', to: 'devise/sessions#new'
     delete '/users/sign_out', to: 'devise/sessions#destroy'
   end
-  resources :comments
-  resources :posts
+
+  post '/posts/:id', to:'posts#show'
+  resources :posts do
+    resources :comments, only: [:index, :edit, :create, :update, :destroy]
+  end
   resources :users
   root to: "posts#index"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

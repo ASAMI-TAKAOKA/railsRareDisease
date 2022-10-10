@@ -17,7 +17,7 @@
         <td><%= comment.titile %></td>
         <td><%= comment.body %></td>
         <td><%= link_to '詳細', comment %></td>
-        <td><%= link_to '編集', edit_comment_path(comment) %></td>
+        <td><%= link_to '編集', edit_post_comment_path(comment) %></td>
         <td><%= link_to '削除', comment, method: :delete, data: { confirm: ' 削除してよろしいですか？' } %></td>
       </tr>
     <% end %>
@@ -26,4 +26,3 @@
 
 <br>
 
-<%= link_to 'コメントを投稿する', new_comment_path %>
