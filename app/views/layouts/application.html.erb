@@ -7,12 +7,10 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'hello_vue' %>
+    <%= stylesheet_pack_tag 'hello_vue'  %>
   </head>
-
   <body>
-  <%= javascript_pack_tag 'hello_vue' %>
-  <%= stylesheet_pack_tag 'hello_vue'  %> 
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
       <header class="navbar navbar-fixed-top navbar-inverse">
@@ -32,6 +30,9 @@
           </nav>
         </div>
       </header>
+  <div id="hello">
+  <p>{{ message }}</p>
+  </div>
     <%= yield %>
   </body>
 </html>
