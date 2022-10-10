@@ -1,23 +1,10 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: %i[ edit create update destroy ]
-
-  # GET /comments/1/edit
-  def edit
-  end
-
   # POST /comments or /comments.json
-  def create
+  def create! # #createの後ろに"!"
+    binding.pry #データを保存するメソッドの中でデバッグ実行
     @comment = Comment.create(comment_params)
+    redirect_to "/posts/#{comment.post.id}"
 
-    respond_to do |format|
-      if @comment.save
-        format.html { redirect_to "/posts/#{comment.post.id}", notice: "新規コメントを投稿しました。" }
-        format.json { render :show, status: :created, location: @comment }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # PATCH/PUT /comments/1 or /comments/1.json
