@@ -54,10 +54,11 @@ class PostsController < ApplicationController
 
   # DELETE /posts/1 or /posts/1.json
   def destroy
+    @post = Post.find(params[:id])
     @post.destroy
 
     respond_to do |format|
-      format.html { redirect_to root_path, notice: "記事を削除しました。" }
+      format.html { redirect_to posts_url, notice: "削除しました。" }
       format.json { head :no_content }
     end
   end
