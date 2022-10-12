@@ -15,8 +15,8 @@ ActiveRecord::Schema.define(version: 2022_09_30_143721) do
   create_table "comments", force: :cascade do |t|
     t.string "titile"
     t.text "body"
-    t.string "user_id"
-    t.string "post_id"
+    t.integer "user_id"
+    t.integer "post_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 2022_09_30_143721) do
   create_table "posts", force: :cascade do |t|
     t.string "titile"
     t.text "body"
-    t.string "user_id"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

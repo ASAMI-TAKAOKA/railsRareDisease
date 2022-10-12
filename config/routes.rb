@@ -8,7 +8,6 @@ Rails.application.routes.draw do
     delete '/users/sign_out', to: 'devise/sessions#destroy'
   end
 
-  post '/posts/:id', to:'posts#show'
   resources :posts do
     resources :comments, only: [:create, :edit, :update, :destroy]
   end

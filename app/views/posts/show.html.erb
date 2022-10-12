@@ -21,8 +21,8 @@
               <strong><%= link_to comment.user.name, "/users/#{comment.user_id}" %>:</strong>
               <%= post.comment.titile %>
               <%= post.comment.body %>
-              <%= link_to "コメント編集", edit_post_comment_path(@post, comment) %>
-              <%= link_to "コメント削除", "/posts/#{@post.id}", method: :delete %>
+              <%= link_to "コメント編集", edit_post_comment_path(comment), method: :post %>
+              <%= link_to "コメント削除", post.comment, method: :delete, data: { confirm: '削除してよろしいですか？' } %>
             </p>
         </td>
       </tr>     
