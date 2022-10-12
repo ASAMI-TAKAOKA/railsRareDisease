@@ -8,6 +8,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1 or /posts/1.json
   def show
+    @post = Post.find(params[:id])
     @comment = Comment.new
     # postsテーブルとcommentsテーブルはアソシエーションが組まれているため、
     # @post.commentsとすることで、@postについて投稿された全てのコメントを取得することができる。
@@ -42,14 +43,12 @@ class PostsController < ApplicationController
 
   # PATCH/PUT /posts/1 or /posts/1.json
   def update
-    respond_to do |format|
-      if @post.update(post_params)
-        format.html { redirect_to post_url(@post), notice: "記事を更新しました。" }
-        format.json { render :show, status: :ok, location: @post }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
+    @post = Post.find(params[:id])
+    if @post.update(post_params)
+      redirect_to root_path, notice: "記事を編集しました"
+    else
+      flash.now[:danger] = "編集に失敗しました"
+      render 'edit'
     end
   end
 

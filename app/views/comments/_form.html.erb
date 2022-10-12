@@ -1,17 +1,17 @@
-<%= form_with models: [@post, @comment] do |form| %>
+<%= form_with models: [@post, @comment] do |f| %>
 
 <h3>コメント投稿</h3>
   <div class="field">
-    <%= form.label :titile %>
-    <%= form.text_field :titile %>
+    <%= f.label :titile %>
+    <%= f.text_field :titile %>
   </div>
 
   <div class="field">
-    <%= form.label :body %>
-    <%= form.text_area :body %>
+    <%= f.label :body %>
+    <%= f.text_area :body %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= f.submit %>
   </div>
 <% end %>
