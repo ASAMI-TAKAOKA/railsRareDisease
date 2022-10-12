@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   post '/posts/:id', to:'posts#show'
   resources :posts do
-    resources :comments, only: [:index, :edit, :create, :update, :destroy]
+    resources :comments, only: [:create, :edit, :update, :destroy]
   end
   resources :users
   root to: "posts#index"

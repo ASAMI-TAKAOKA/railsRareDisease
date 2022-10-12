@@ -10,4 +10,25 @@
   <%= @post.body %>
 </p>
 <%= render 'comments/form', comment: @comment %>
-<%= render 'comments/show', comment: @comment %>
+
+<h3>コメント一覧</h3>
+<% @comments.each do |comment| %>
+  <table class="table-light table-bordered text-dark">
+    <tbody>
+      <tr>
+        <td>
+            <p>
+              <strong><%= link_to comment.user.name, "/users/#{comment.user_id}" %>:</strong>
+              <%= post.comment.titile %>
+              <%= post.comment.body %>
+              <%= link_to "コメント編集", edit_post_comment_path(@post, comment) %>
+              <%= link_to "コメント削除", "/posts/#{@post.id}", method: :delete %>
+            </p>
+        </td>
+      </tr>     
+    </tbody>
+  </table>
+<% end %>
+
+<%= link_to '記事編集', root_path %> |
+<%= link_to '戻る', root_path %>

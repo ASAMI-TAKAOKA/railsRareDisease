@@ -1,33 +1,40 @@
 class CommentsController < ApplicationController
   # POST /comments or /comments.json
-  def create! # #createの後ろに"!"
-    binding.pry #データを保存するメソッドの中でデバッグ実行
-    @comment = Comment.create(comment_params)
-    redirect_to "/posts/#{comment.post.id}"
 
+  def create
+    @post = Post.find(params[:post_id])
+    @comment = current_user.comments.build(comment_params)
+    if @comment.save
+      redirect_to root_path, notice: "コメントを投稿しました"
+    else
+      flash[:danger] = "投稿に失敗しました"
+      redirect_back(fallback_location: root_path)
+    end
+  end
+
+  def edit
+    @post = Post.find(params[:post_id])
+    @comment = Comment.find(params[:id])
   end
 
   # PATCH/PUT /comments/1 or /comments/1.json
   def update
-    respond_to do |format|
-      if @comment.update(comment_params)
-        format.html { redirect_to posts_path(@comment), notice: "コメントを更新しました。" }
-        format.json { render :show, status: :ok, location: @comment }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
-      end
+    @post = Post.find(params[:post_id])
+    @comment = Comment.find(params[:id])
+    if @comment.update(comment_params)
+      redirect_to root_path(@post), notice: "コメントを編集しました"
+    else
+      flash.now[:danger] = "編集に失敗しました"
+      render 'edit'
     end
   end
 
   # DELETE /comments/1 or /comments/1.json
   def destroy
+    @comment.Comment.find(params[:id])
     @comment.destroy
-
-    respond_to do |format|
-      format.html { redirect_to root_path, notice: "コメントを削除しました。" }
-      format.json { head :no_content }
-    end
+    flash[:danger] = "コメントを削除しました"
+    redirect_back(fallback_location: root_path)
   end
 
   private
