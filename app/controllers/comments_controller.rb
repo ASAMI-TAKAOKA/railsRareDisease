@@ -1,14 +1,16 @@
 class CommentsController < ApplicationController
+  before_action :comment_params, only: %i[ create show edit ]
   # POST /comments or /comments.json
 
   def create
-    @post = Post.find(params[:post_id])
+    # @post = Post.find(params[:post_id])
     @comment = current_user.comments.build(comment_params)
     if @comment.save
-      redirect_to root_path, notice: "コメントを投稿しました"
+      flash.now[:notice] = 'コメントを投稿しました'
+      render template: 'posts/show'  #render先にjsファイルを指定
     else
       flash[:danger] = "投稿に失敗しました"
-      redirect_back(fallback_location: root_path)
+      render template: 'posts/show'
     end
   end
 
