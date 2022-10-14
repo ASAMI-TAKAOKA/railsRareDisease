@@ -1,17 +1,17 @@
-<%= form_with models: [@post, @comment] do |f| %>
+<%= form_with models: [@post, @comment], local: true do |f| %>
 
 <h3>コメント投稿</h3>
   <div class="field">
     <%= f.label :titile %>
-    <%= f.text_field :titile %>
+    <%= f.text_field :titile, placeholder: "タイトルをここに" %>
   </div>
 
   <div class="field">
     <%= f.label :body %>
-    <%= f.text_area :body %>
+    <%= f.text_area :body, rows: '5', placeholder: "コメントをここに" %>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit '送信する'%>
   </div>
 <% end %>

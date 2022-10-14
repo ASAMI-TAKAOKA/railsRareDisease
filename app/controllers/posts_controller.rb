@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[ show edit ]
+  before_action :set_post, only: %i[ index show edit ]
 
   # GET /posts or /posts.json
   def index
@@ -9,7 +9,9 @@ class PostsController < ApplicationController
   # GET /posts/1 or /posts/1.json
   def show
     @post = Post.find(params[:id])
-    @comment = Comment.new
+    @comment = @post.comments.build #buildの利用
+    # @comment = Comment.new #newの利用でも良いが、外部参照キーを自動でセットしてくれないので少し不便。
+
     # postsテーブルとcommentsテーブルはアソシエーションが組まれているため、
     # @post.commentsとすることで、@postについて投稿された全てのコメントを取得することができる。
     # ビューではどのユーザーのコメントかを明らかにするために、アソシエーションを使ってユーザーのレコードを取得する処理をする。
