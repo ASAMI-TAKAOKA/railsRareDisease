@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     delete '/users/sign_out', to: 'devise/sessions#destroy'
   end
 
-  post '/posts/:posts_id', to:'comments#create', as: 'create_comment' # 追加
+  post '/posts/:post_id', to:'comments#create', as: 'create_comment' # 追加
   resources :posts do
     resources :comments, only: [:create, :edit, :update, :destroy]
   end
