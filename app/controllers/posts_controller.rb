@@ -8,15 +8,19 @@ class PostsController < ApplicationController
 
   # GET /posts/1 or /posts/1.json
   def show
-    @post = Post.find(params[:id])
-    @comment = @post.comments.build #buildの利用
+    @comment = Comment.new
+    @comments = @post.comments.includes(:user)
+
+    # ここから下、一旦保留
+    # @post = Post.find(params[:id])    
+    # @comment = @post.comments.build #buildの利用
     # @comment = Comment.new #newの利用でも良いが、外部参照キーを自動でセットしてくれないので少し不便。
 
     # postsテーブルとcommentsテーブルはアソシエーションが組まれているため、
     # @post.commentsとすることで、@postについて投稿された全てのコメントを取得することができる。
     # ビューではどのユーザーのコメントかを明らかにするために、アソシエーションを使ってユーザーのレコードを取得する処理をする。
     # includesメソッドはN+1問題解消のために使用
-    @comments = @post.comments.includes(:user)
+    # @comments = @post.comments.includes(:user)
   end
 
   # GET /posts/new

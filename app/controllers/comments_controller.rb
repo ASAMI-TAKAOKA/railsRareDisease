@@ -3,7 +3,8 @@ class CommentsController < ApplicationController
   # POST /comments or /comments.json
 
   def create
-    # @post = Post.find(params[:post_id])
+    @post = Post.find(params[:post_id])
+    @comments = @post.comments.includes(:user)
     @comment = current_user.comments.build(comment_params)
     if @comment.save
       flash.now[:notice] = 'コメントを投稿しました'

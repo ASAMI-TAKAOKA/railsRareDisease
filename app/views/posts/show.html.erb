@@ -12,17 +12,17 @@
 <%= render 'comments/form', comment: @comment %>
 
 <h3>コメント一覧</h3>
+<%# binding.pry %>
 <% @comments.each do |comment| %>
   <table class="table-light table-bordered text-dark">
     <tbody>
       <tr>
         <td>
             <p>
-              <strong><%= link_to comment.user.name, "/users/#{comment.user_id}" %>:</strong>
-              <%= post.comment.titile %>
-              <%= post.comment.body %>
-              <%= link_to "コメント編集", edit_post_comment_path(comment), method: :post %>
-              <%= link_to "コメント削除", post.comment, method: :delete, data: { confirm: '削除してよろしいですか？' } %>
+              <%= comment.titile %>
+              <%= comment.body %>
+              <%#= link_to "コメント編集", edit_post_comment_path, method: :get %>
+              <%#= link_to "コメント削除", comment, method: :delete, data: { confirm: '削除してよろしいですか？' } %>
             </p>
         </td>
       </tr>     
