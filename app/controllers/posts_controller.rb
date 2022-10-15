@@ -1,9 +1,9 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[ index show edit ]
+  before_action :set_post, only: %i[ show edit destroy ]
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.all.includes(:user)
   end
 
   # GET /posts/1 or /posts/1.json
